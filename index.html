@@ -21,10 +21,69 @@
 <script type="text/javascript">
     //初始化编辑器
     $("#editor").markdown({
-
+//        additionalButtons: [
+//            [{
+//                name: 'groupLink',
+//                data: [{
+//                    name: 'cmdEmoji',
+//                    hotkey: 'Ctrl+E',
+//                    title: 'Emoji',
+//                    icon: {
+//                        glyph: 'glyphicon glyphicon-bold',
+//                        fa: 'fa fa-smile-o',
+//                        'fa-3': 'icon-bold',
+//                        octicons: 'octicon octicon-bold'
+//                    },
+//                    callback: function (e) {
+//                        // Give/remove ** surround the selection
+//                        var chunk, cursor, selected = e.getSelection(),
+//                            content = e.getContent();
+//
+//                        if (selected.length === 0) {
+//                            // Give extra word
+//                            chunk = e.__localize('Emoji');
+//                        } else {
+//                            chunk = selected.text;
+//                        }
+//                        alert("选择图标");
+//                        // transform selection and set the cursor into chunked text
+////                        if (content.substr(selected.start - 2, 2) === '**' &&
+////                            content.substr(selected.end, 2) === '**') {
+////                            e.setSelection(selected.start - 2, selected.end + 2);
+////                            e.replaceSelection(chunk);
+////                            cursor = selected.start - 2;
+////                        } else {
+////                            e.replaceSelection('**' + chunk + '**');
+////                            cursor = selected.start + 2;
+////                        }
+//
+//                        // Set the cursor
+////                        e.setSelection(cursor, cursor + chunk.length);
+//                    }
+//                }
+//                ]
+//            }]
+//        ],
         autofocus: true,
         language: 'zh',
-    })
+        footer:'<div id="twitter-footer" class="well" style="display:none;"></div><small id="twitter-counter" class="text-success">140 character left</small>',
+        onChange:function(e){
+            var content = e.parseContent(),
+                content_length = (content.match(/\n/g)||[]).length + content.length
+
+            if (content == '') {
+                $('#twitter-footer').hide()
+            } else {
+                $('#twitter-footer').show().html(content)
+            }
+
+            if (content_length > 140) {
+                $('#twitter-counter').removeClass('text-success').addClass('text-danger').html(content_length-140+' character surplus.')
+            } else {
+                $('#twitter-counter').removeClass('text-danger').addClass('text-success').html(140-content_length+' character left.')
+            }
+        }
+    });
 </script>
 </body>
 </html>

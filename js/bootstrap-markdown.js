@@ -1225,6 +1225,43 @@
               e.setSelection(cursor, cursor + chunk.length);
             }
           }
+        },
+            {
+            name: 'cmdEmoji',
+            hotkey: 'Ctrl+E',
+            title: 'Emoji',
+            icon: {
+                glyph: 'glyphicon glyphicon-bold',
+                fa: 'fa fa-smile-o',
+                'fa-3': 'icon-bold',
+                octicons: 'octicon octicon-bold'
+            },
+            callback: function (e) {
+                // Give/remove ** surround the selection
+                var chunk, cursor, selected = e.getSelection(),
+                    content = e.getContent();
+
+                if (selected.length === 0) {
+                    // Give extra word
+                    chunk = e.__localize('Emoji');
+                } else {
+                    chunk = selected.text;
+                }
+                alert("选择图标,后续完善");
+                // transform selection and set the cursor into chunked text
+//                        if (content.substr(selected.start - 2, 2) === '**' &&
+//                            content.substr(selected.end, 2) === '**') {
+//                            e.setSelection(selected.start - 2, selected.end + 2);
+//                            e.replaceSelection(chunk);
+//                            cursor = selected.start - 2;
+//                        } else {
+//                            e.replaceSelection('**' + chunk + '**');
+//                            cursor = selected.start + 2;
+//                        }
+
+                // Set the cursor
+//                        e.setSelection(cursor, cursor + chunk.length);
+            }
         }]
       }, {
         name: 'groupMisc',

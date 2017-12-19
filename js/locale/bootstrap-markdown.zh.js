@@ -10,6 +10,7 @@
     'URL/Link': "链接",
     'Image': "图片",
     'List': "列表",
+    'Emoji':"表情",
     'Unordered List': "无序列表",
     'Ordered List': "有序列表",
     'Code': "代码",
